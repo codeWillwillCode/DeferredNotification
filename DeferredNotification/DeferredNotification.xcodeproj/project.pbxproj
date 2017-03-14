@@ -7,23 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		98C775751E76EE7D004D6BE2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C775741E76EE7D004D6BE2 /* main.m */; };
-		98C775781E76EE7D004D6BE2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C775771E76EE7D004D6BE2 /* AppDelegate.m */; };
-		98C7757B1E76EE7D004D6BE2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C7757A1E76EE7D004D6BE2 /* ViewController.m */; };
-		98C775801E76EE7D004D6BE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98C7757F1E76EE7D004D6BE2 /* Assets.xcassets */; };
-		98C775831E76EE7D004D6BE2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98C775811E76EE7D004D6BE2 /* LaunchScreen.storyboard */; };
+		98C7758D1E778E2F004D6BE2 /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C7758C1E778E2F004D6BE2 /* Aspects.m */; };
+		98C775991E778F00004D6BE2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C775901E778F00004D6BE2 /* AppDelegate.m */; };
+		98C7759A1E778F00004D6BE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98C775911E778F00004D6BE2 /* Assets.xcassets */; };
+		98C7759B1E778F00004D6BE2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98C775921E778F00004D6BE2 /* LaunchScreen.storyboard */; };
+		98C7759C1E778F00004D6BE2 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 98C775951E778F00004D6BE2 /* Info.plist */; };
+		98C7759D1E778F00004D6BE2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C775961E778F00004D6BE2 /* main.m */; };
+		98C7759E1E778F00004D6BE2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C775981E778F00004D6BE2 /* ViewController.m */; };
+		98C775A11E779540004D6BE2 /* YHDeferredNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C775A01E779540004D6BE2 /* YHDeferredNotification.m */; };
+		98C775A41E77CA90004D6BE2 /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C775A31E77CA90004D6BE2 /* BaseTableViewController.m */; };
+		98C775A71E77CAA3004D6BE2 /* AViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C775A61E77CAA3004D6BE2 /* AViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		98C775701E76EE7D004D6BE2 /* DeferredNotification.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeferredNotification.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		98C775741E76EE7D004D6BE2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		98C775761E76EE7D004D6BE2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		98C775771E76EE7D004D6BE2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		98C775791E76EE7D004D6BE2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		98C7757A1E76EE7D004D6BE2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		98C7757F1E76EE7D004D6BE2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		98C775821E76EE7D004D6BE2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		98C775841E76EE7D004D6BE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		98C7758B1E778E2F004D6BE2 /* Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aspects.h; sourceTree = "<group>"; };
+		98C7758C1E778E2F004D6BE2 /* Aspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Aspects.m; sourceTree = "<group>"; };
+		98C7758F1E778F00004D6BE2 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		98C775901E778F00004D6BE2 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		98C775911E778F00004D6BE2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		98C775931E778F00004D6BE2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		98C775951E778F00004D6BE2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		98C775961E778F00004D6BE2 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		98C775971E778F00004D6BE2 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		98C775981E778F00004D6BE2 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		98C7759F1E779540004D6BE2 /* YHDeferredNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHDeferredNotification.h; sourceTree = "<group>"; };
+		98C775A01E779540004D6BE2 /* YHDeferredNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YHDeferredNotification.m; sourceTree = "<group>"; };
+		98C775A21E77CA90004D6BE2 /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
+		98C775A31E77CA90004D6BE2 /* BaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewController.m; sourceTree = "<group>"; };
+		98C775A51E77CAA3004D6BE2 /* AViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AViewController.h; sourceTree = "<group>"; };
+		98C775A61E77CAA3004D6BE2 /* AViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,7 +53,8 @@
 		98C775671E76EE7D004D6BE2 = {
 			isa = PBXGroup;
 			children = (
-				98C775721E76EE7D004D6BE2 /* DeferredNotification */,
+				98C7758A1E778E2F004D6BE2 /* Aspects */,
+				98C7758E1E778F00004D6BE2 /* DeferredNotificationDemo */,
 				98C775711E76EE7D004D6BE2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -53,27 +67,42 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		98C775721E76EE7D004D6BE2 /* DeferredNotification */ = {
+		98C7758A1E778E2F004D6BE2 /* Aspects */ = {
 			isa = PBXGroup;
 			children = (
-				98C775761E76EE7D004D6BE2 /* AppDelegate.h */,
-				98C775771E76EE7D004D6BE2 /* AppDelegate.m */,
-				98C775791E76EE7D004D6BE2 /* ViewController.h */,
-				98C7757A1E76EE7D004D6BE2 /* ViewController.m */,
-				98C7757F1E76EE7D004D6BE2 /* Assets.xcassets */,
-				98C775811E76EE7D004D6BE2 /* LaunchScreen.storyboard */,
-				98C775841E76EE7D004D6BE2 /* Info.plist */,
-				98C775731E76EE7D004D6BE2 /* Supporting Files */,
+				98C7758B1E778E2F004D6BE2 /* Aspects.h */,
+				98C7758C1E778E2F004D6BE2 /* Aspects.m */,
 			);
-			path = DeferredNotification;
+			path = Aspects;
 			sourceTree = "<group>";
 		};
-		98C775731E76EE7D004D6BE2 /* Supporting Files */ = {
+		98C7758E1E778F00004D6BE2 /* DeferredNotificationDemo */ = {
 			isa = PBXGroup;
 			children = (
-				98C775741E76EE7D004D6BE2 /* main.m */,
+				98C775941E778F00004D6BE2 /* DeferredNotification */,
+				98C7758F1E778F00004D6BE2 /* AppDelegate.h */,
+				98C775901E778F00004D6BE2 /* AppDelegate.m */,
+				98C775A21E77CA90004D6BE2 /* BaseTableViewController.h */,
+				98C775A31E77CA90004D6BE2 /* BaseTableViewController.m */,
+				98C775A51E77CAA3004D6BE2 /* AViewController.h */,
+				98C775A61E77CAA3004D6BE2 /* AViewController.m */,
+				98C775911E778F00004D6BE2 /* Assets.xcassets */,
+				98C775921E778F00004D6BE2 /* LaunchScreen.storyboard */,
+				98C775951E778F00004D6BE2 /* Info.plist */,
+				98C775961E778F00004D6BE2 /* main.m */,
+				98C775971E778F00004D6BE2 /* ViewController.h */,
+				98C775981E778F00004D6BE2 /* ViewController.m */,
 			);
-			name = "Supporting Files";
+			path = DeferredNotificationDemo;
+			sourceTree = "<group>";
+		};
+		98C775941E778F00004D6BE2 /* DeferredNotification */ = {
+			isa = PBXGroup;
+			children = (
+				98C7759F1E779540004D6BE2 /* YHDeferredNotification.h */,
+				98C775A01E779540004D6BE2 /* YHDeferredNotification.m */,
+			);
+			path = DeferredNotification;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,8 +163,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				98C775831E76EE7D004D6BE2 /* LaunchScreen.storyboard in Resources */,
-				98C775801E76EE7D004D6BE2 /* Assets.xcassets in Resources */,
+				98C7759A1E778F00004D6BE2 /* Assets.xcassets in Resources */,
+				98C7759B1E778F00004D6BE2 /* LaunchScreen.storyboard in Resources */,
+				98C7759C1E778F00004D6BE2 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,19 +176,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				98C7757B1E76EE7D004D6BE2 /* ViewController.m in Sources */,
-				98C775781E76EE7D004D6BE2 /* AppDelegate.m in Sources */,
-				98C775751E76EE7D004D6BE2 /* main.m in Sources */,
+				98C775991E778F00004D6BE2 /* AppDelegate.m in Sources */,
+				98C775A71E77CAA3004D6BE2 /* AViewController.m in Sources */,
+				98C775A11E779540004D6BE2 /* YHDeferredNotification.m in Sources */,
+				98C7759D1E778F00004D6BE2 /* main.m in Sources */,
+				98C7759E1E778F00004D6BE2 /* ViewController.m in Sources */,
+				98C775A41E77CA90004D6BE2 /* BaseTableViewController.m in Sources */,
+				98C7758D1E778E2F004D6BE2 /* Aspects.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		98C775811E76EE7D004D6BE2 /* LaunchScreen.storyboard */ = {
+		98C775921E778F00004D6BE2 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				98C775821E76EE7D004D6BE2 /* Base */,
+				98C775931E778F00004D6BE2 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -257,8 +291,7 @@
 		98C775881E76EE7D004D6BE2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = DeferredNotification/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/DeferredNotificationDemo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ye.DeferredNotification;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -268,8 +301,7 @@
 		98C775891E76EE7D004D6BE2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = DeferredNotification/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/DeferredNotificationDemo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ye.DeferredNotification;
 				PRODUCT_NAME = "$(TARGET_NAME)";
