@@ -8,7 +8,6 @@
 #import "BaseTableViewController.h"
 #import "AViewController.h"
 #import "YHDeferredNotification.h"
-
 @interface BaseTableViewController ()
 
 @property (nonatomic,strong) NSArray *modelArray;
@@ -22,7 +21,6 @@
     [self unsubscribeAll];
 }
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -31,6 +29,10 @@
     self.tableView.tableHeaderView = self.refreshControl;
     self.modelArray = @[@{
                             @"title": @"从其他页面传值回来",
+                            @"instanceClass": [AViewController class]
+                            },
+                        @{
+                            @"title": @"一次性订阅",
                             @"instanceClass": [AViewController class]
                             }
                         ];
@@ -51,7 +53,7 @@
 - (void)subscribe{
     __weak __typeof__(self) weakSelf = self;
     
-    [self subscribe:@"NotificationA" onSelector:@selector(viewWillAppear:) withOptions:YHDeferredOptionsAfter handler:^(id data){
+    [self subscribe:@"NotificationA" onSelector:@selector(viewWillAppear:) withOptions:YHDeferredOptionsAfter|YHDeferredOptionsOnece handler:^(id data){
         __strong __typeof__(weakSelf) strongSelf = weakSelf;
         NSLog(@"receive NotificationA!");
         if (data) {

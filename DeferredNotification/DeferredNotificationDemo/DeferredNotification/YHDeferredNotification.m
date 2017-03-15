@@ -8,24 +8,27 @@
 
 #import "YHDeferredNotification.h"
 #import "Aspects.h"
-
+#import <objc/runtime.h>
 @interface YHDeferredManager : NSObject
 
 + (instancetype)sharedManager;
 
-@property (nonatomic,strong) NSMutableDictionary *observers;
-@property (nonatomic,strong) NSMutableDictionary *subscriptions;
-
+//@property (nonatomic,strong) NSMutableDictionary *observers;
+//@property (nonatomic,strong) NSMutableDictionary *subscriptions;
+//
 @end
 
 @interface YHDeferredInfo : NSObject
 
+@property (nonatomic, weak) id observer;
+//@property (nonatomic, strong) id reveiver;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) id block;
 @property (nonatomic, strong) id data;
-@property (nonatomic, assign) SEL selector;
+@property (nonatomic, assign) SEL selector; 
 @property (nonatomic, assign) YHDeferredOptions option;
 @property (nonatomic, strong) id<AspectToken> token;
+@property (nonatomic, assign) BOOL valid;
 
 @end
 
@@ -46,16 +49,13 @@ static NSString *const kYHDeferredNotificationKey = @"kYHDeferredNotificationKey
 
 - (id)init {
     if ((self = [super init])) {
-        _observers = [NSMutableDictionary new];
-        _subscriptions = [NSMutableDictionary new];
+//        _observers = [NSMutableDictionary new];
+//        _subscriptions = [NSMutableDictionary new];
         
     }
     return self;
 }
 
-static NSString *subscriptionKey(Class class){
-    return [NSString stringWithFormat:@"deferredNotification_%@",NSStringFromClass([class class])];
-}
 
 - (id<AspectToken>)hookInstance:(id)instance selector:(SEL)selector option:(YHDeferredOptions)option{
     __weak __typeof__(self) weakSelf = self;
@@ -66,15 +66,29 @@ static NSString *subscriptionKey(Class class){
                                   __strong __typeof__(weakSelf) strongSelf = weakSelf;
                                   if (!instance) return;
                                   
-                                  NSMutableSet *infosArray = [strongSelf.subscriptions objectForKey:subscriptionKey(instance)];
-                                  [infosArray enumerateObjectsUsingBlock:^(YHDeferredInfo *info, BOOL * _Nonnull stop) {
+                                  NSMutableArray *infosArray = objc_getAssociatedObject(strongSelf, selector);
+                                  __block NSArray *infoToRemove = nil;
+                                  [infosArray enumerateObjectsUsingBlock:^(YHDeferredInfo *info, NSUInteger idx, BOOL * _Nonnull stop) {
+                                      if (!info.valid) {
+                                          return;
+                                      }
                                       YHHandler block = info.block;
+                                      info.valid = NO;
+                                      block(info.data);
+                                      
                                       if (option & YHDeferredOptionsOnece) {
                                           [info.token remove];
+                                          [[NSNotificationCenter defaultCenter] removeObserver:info.observer];
+                                          info.token = nil;
+                                          info.block = nil;
+                                          info.data = nil;
+                                          infoToRemove = [infoToRemove?:@[] arrayByAddingObject:info];
                                       }
-                                      block(info.data);
+                                      
                                   }];
-                                  [strongSelf.subscriptions removeObjectForKey:subscriptionKey(instance)];
+                                  if (infoToRemove) {
+                                      [infosArray removeObjectsInArray:infoToRemove];
+                                  }
                                   
                               }error:NULL];
 }
@@ -92,29 +106,32 @@ static NSString *subscriptionKey(Class class){
     id observer =
     [[NSNotificationCenter defaultCenter] addObserverForName:eventName object:self queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
         __strong __typeof__(weakSelf) strongSelf = weakSelf;
-        YHDeferredInfo *info = [YHDeferredInfo new];
-        info.name = eventName;
-        info.block = handler;
-        info.selector = selector;
-        info.option = option;
-        info.token = token;
-        info.data = [note.userInfo objectForKey:kYHDeferredNotificationKey];
-        
-        NSMutableSet *infosSet = [strongSelf.subscriptions objectForKey:eventName];
-        if (!infosSet) {
-            infosSet = [NSMutableSet set];
+        NSArray *infoArray = objc_getAssociatedObject(strongSelf, selector);
+        for (YHDeferredInfo *info in infoArray) {
+            if (info.name != note.name) {
+                continue;
+            }
+            info.valid = YES;
+            info.data = [note.userInfo objectForKey:kYHDeferredNotificationKey];
         }
-        [infosSet addObject:info];
-        [strongSelf.subscriptions setObject:infosSet forKey:subscriptionKey(instance)];
     }];
     
-    NSMutableSet *observersSet = [self.observers objectForKey:subscriptionKey(instance)];
-    if (!observersSet) {
-        observersSet = [NSMutableSet set];
-    }
-    [observersSet addObject:observer];
-    [self.observers setObject:observersSet forKey:subscriptionKey(instance)];
+    YHDeferredInfo *info = [YHDeferredInfo new];
+    info.name = eventName;
+    info.block = handler;
+    info.selector = selector;
+    info.option = option;
+    info.token = token;
+    info.observer = observer;
+//    info.reveiver = instance;
+    info.valid = NO;
     
+    NSMutableArray *infoArray = objc_getAssociatedObject(self, selector);
+    if (!infoArray) {
+        infoArray = [NSMutableArray new];
+        objc_setAssociatedObject(self, selector, infoArray, OBJC_ASSOCIATION_RETAIN);
+    }
+    [infoArray addObject:info];
 }
 
 - (void)instance:(__unsafe_unretained id)instance publish:(NSString *)eventName{
@@ -128,44 +145,44 @@ static NSString *subscriptionKey(Class class){
     [[NSNotificationCenter defaultCenter] postNotificationName:eventName object:self userInfo:!data?nil:@{kYHDeferredNotificationKey: data}];
 }
 
-- (void)instance:(__unsafe_unretained id)instance unsubscribe:(NSString *)eventName{
-    NSCParameterAssert(instance);
-    NSCParameterAssert(eventName);
-    
-    NSMutableSet *observersSet = [self.observers objectForKey:subscriptionKey(instance)];
-    if (!observersSet) {
-        return;
-    }
-    
-    NSMutableSet *removeSet = [NSMutableSet set];
-    NSEnumerator *enumerator = [observersSet objectEnumerator];
-    id value = nil;
-    while (value = [enumerator nextObject]) {
-        NSString *name = [value valueForKey:@"name"];
-        if ([name isEqualToString:eventName]) {
-            [removeSet addObject:value];
-            [[NSNotificationCenter defaultCenter] removeObserver:value name:name object:self];
-        }
-    }
-    [observersSet minusSet:removeSet];
-}
-
-- (void)instanceUnsubscribeAll:(__unsafe_unretained id)instance{
-    NSCParameterAssert(instance);
-    
-    NSMutableSet *observersSet = [self.observers objectForKey:subscriptionKey(instance)];
-    if (!observersSet) {
-        return;
-    }
-    
-    NSEnumerator *enumerator = [observersSet objectEnumerator];
-    id value = nil;
-    while (value = [enumerator nextObject]) {
-        NSString *name = [value valueForKey:@"name"];
-        [[NSNotificationCenter defaultCenter] removeObserver:value name:name object:self];
-    }
-    [self.observers removeObjectForKey:subscriptionKey(instance)];
-}
+//- (void)instance:(__unsafe_unretained id)instance unsubscribe:(NSString *)eventName{
+//    NSCParameterAssert(instance);
+//    NSCParameterAssert(eventName);
+//    
+//    NSMutableSet *observersSet = [self.observers objectForKey:subscriptionKey(instance)];
+//    if (!observersSet) {
+//        return;
+//    }
+//    
+//    NSMutableSet *removeSet = [NSMutableSet set];
+//    NSEnumerator *enumerator = [observersSet objectEnumerator];
+//    id value = nil;
+//    while (value = [enumerator nextObject]) {
+//        NSString *name = [value valueForKey:@"name"];
+//        if ([name isEqualToString:eventName]) {
+//            [removeSet addObject:value];
+//            [[NSNotificationCenter defaultCenter] removeObserver:value name:name object:self];
+//        }
+//    }
+//    [observersSet minusSet:removeSet];
+//}
+//
+//- (void)instanceUnsubscribeAll:(__unsafe_unretained id)instance{
+//    NSCParameterAssert(instance);
+//    
+//    NSMutableSet *observersSet = [self.observers objectForKey:subscriptionKey(instance)];
+//    if (!observersSet) {
+//        return;
+//    }
+//    
+//    NSEnumerator *enumerator = [observersSet objectEnumerator];
+//    id value = nil;
+//    while (value = [enumerator nextObject]) {
+//        NSString *name = [value valueForKey:@"name"];
+//        [[NSNotificationCenter defaultCenter] removeObserver:value name:name object:self];
+//    }
+//    [self.observers removeObjectForKey:subscriptionKey(instance)];
+//}
 
 
 @end
@@ -184,13 +201,13 @@ static NSString *subscriptionKey(Class class){
     [[YHDeferredManager sharedManager] instance:self publish:name data:data];
 }
 
-- (void)unsubscribe:(NSString *)eventName{
-    [[YHDeferredManager sharedManager] instance:self unsubscribe:eventName];
-}
-
-- (void)unsubscribeAll{
-    [[YHDeferredManager sharedManager] instanceUnsubscribeAll:self];
-}
+//- (void)unsubscribe:(NSString *)eventName{
+//    [[YHDeferredManager sharedManager] instance:self unsubscribe:eventName];
+//}
+//
+//- (void)unsubscribeAll{
+//    [[YHDeferredManager sharedManager] instanceUnsubscribeAll:self];
+//}
 
 @end
 
