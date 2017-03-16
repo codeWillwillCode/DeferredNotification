@@ -26,6 +26,8 @@ typedef void (^YHHandler)(id data);
 
 - (void)unsubscribe:(NSString *)eventName;
 
+- (void)unsubscribe:(NSString *)name selector:(SEL)selector;
+
 - (void)unsubscribeAll;
 
 @end

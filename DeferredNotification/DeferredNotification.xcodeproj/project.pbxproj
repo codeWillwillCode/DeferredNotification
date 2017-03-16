@@ -17,6 +17,7 @@
 		98C775A11E779540004D6BE2 /* YHDeferredNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C775A01E779540004D6BE2 /* YHDeferredNotification.m */; };
 		98C775A41E77CA90004D6BE2 /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C775A31E77CA90004D6BE2 /* BaseTableViewController.m */; };
 		98C775A71E77CAA3004D6BE2 /* AViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C775A61E77CAA3004D6BE2 /* AViewController.m */; };
+		98C775AD1E7A636A004D6BE2 /* BViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C775AC1E7A636A004D6BE2 /* BViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,8 @@
 		98C775A31E77CA90004D6BE2 /* BaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewController.m; sourceTree = "<group>"; };
 		98C775A51E77CAA3004D6BE2 /* AViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AViewController.h; sourceTree = "<group>"; };
 		98C775A61E77CAA3004D6BE2 /* AViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AViewController.m; sourceTree = "<group>"; };
+		98C775AB1E7A636A004D6BE2 /* BViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BViewController.h; sourceTree = "<group>"; };
+		98C775AC1E7A636A004D6BE2 /* BViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +89,8 @@
 				98C775A31E77CA90004D6BE2 /* BaseTableViewController.m */,
 				98C775A51E77CAA3004D6BE2 /* AViewController.h */,
 				98C775A61E77CAA3004D6BE2 /* AViewController.m */,
+				98C775AB1E7A636A004D6BE2 /* BViewController.h */,
+				98C775AC1E7A636A004D6BE2 /* BViewController.m */,
 				98C775911E778F00004D6BE2 /* Assets.xcassets */,
 				98C775921E778F00004D6BE2 /* LaunchScreen.storyboard */,
 				98C775951E778F00004D6BE2 /* Info.plist */,
@@ -181,6 +186,7 @@
 				98C775A11E779540004D6BE2 /* YHDeferredNotification.m in Sources */,
 				98C7759D1E778F00004D6BE2 /* main.m in Sources */,
 				98C7759E1E778F00004D6BE2 /* ViewController.m in Sources */,
+				98C775AD1E7A636A004D6BE2 /* BViewController.m in Sources */,
 				98C775A41E77CA90004D6BE2 /* BaseTableViewController.m in Sources */,
 				98C7758D1E778E2F004D6BE2 /* Aspects.m in Sources */,
 			);
@@ -327,6 +333,7 @@
 				98C775891E76EE7D004D6BE2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

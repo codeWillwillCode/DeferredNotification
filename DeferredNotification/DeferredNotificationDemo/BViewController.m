@@ -1,18 +1,19 @@
 //
-//  AViewController.m
+//  BViewController.m
+//  DeferredNotification
 //
-//  Created by ye on 17/3/2.
+//  Created by ye on 17/3/16.
 //  Copyright © 2017年 ye. All rights reserved.
 //
 
-#import "AViewController.h"
+#import "BViewController.h"
 #import "YHDeferredNotification.h"
 
-@interface AViewController ()
+@interface BViewController ()
 
 @end
 
-@implementation AViewController
+@implementation BViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,18 +31,19 @@
     [buttonP sizeToFit];
     buttonP.frame = CGRectOffset(button.frame, 0, CGRectGetHeight(button.frame));
     [self.view addSubview:buttonP];
-
+    
 }
 
 - (void)refresh:(UIButton *)button{
-    [self publish:@"NotificationA"];
+    [self publish:@"NotificationB"];
 }
 
 - (void)refreshByPostData:(UIButton *)button{
-    [self publish:@"NotificationA" data:@"haha"];
+    [self publish:@"NotificationB" data:@"haha"];
 }
 
 - (void)dealloc{
     NSLog(@"%s",__func__);
 }
+
 @end

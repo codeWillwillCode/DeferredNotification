@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-
+#import "BaseTableViewController.h"
 @interface ViewController ()
 
 @end
@@ -17,12 +17,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    self.view.backgroundColor = [UIColor whiteColor];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+    [button addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventTouchUpInside];
+    [button setTitle:@"Main ViewController" forState:UIControlStateNormal];
+    [button sizeToFit];
+    button.center = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMidY(self.view.frame)-CGRectGetHeight(button.frame));
+    [self.view addSubview:button];
+
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)refresh:(UIButton *)button {
+    [self.navigationController pushViewController:[BaseTableViewController new] animated:YES];
 }
 
 

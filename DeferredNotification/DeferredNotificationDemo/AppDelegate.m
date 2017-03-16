@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "BaseTableViewController.h"
+#import "ViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -19,7 +19,7 @@
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [self.window makeKeyAndVisible];
-    BaseTableViewController *rootViewController = [BaseTableViewController new];
+    ViewController *rootViewController = [ViewController new];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:rootViewController];
     nav.view.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = nav;

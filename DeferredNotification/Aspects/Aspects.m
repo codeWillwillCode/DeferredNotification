@@ -59,6 +59,7 @@ typedef struct _AspectBlock {
 @interface AspectsContainer : NSObject
 - (void)addAspect:(AspectIdentifier *)aspect withOptions:(AspectOptions)injectPosition;
 - (BOOL)removeAspect:(id)aspect;
+- (BOOL)containIdentifierWithSelector:(SEL)aspect;
 - (BOOL)hasAspects;
 @property (atomic, copy) NSArray *beforeAspects;
 @property (atomic, copy) NSArray *insteadAspects;
@@ -298,6 +299,10 @@ static void aspect_cleanupHookedClassAndSelector(NSObject *self, SEL selector) {
         klass = (Class)self;
     }
 
+    AspectsContainer *aspectContainer = aspect_getContainerForObject(self,selector);
+    if ([aspectContainer containIdentifierWithSelector:selector]) {
+        return;
+    }
     // Check if the method is marked as forwarded and undo that.
     Method targetMethod = class_getInstanceMethod(klass, selector);
     IMP targetMethodIMP = method_getImplementation(targetMethod);
@@ -905,6 +910,25 @@ static void aspect_deregisterTrackedSelector(id self, SEL selector) {
             NSMutableArray *newArray = [NSMutableArray arrayWithArray:array];
             [newArray removeObjectAtIndex:index];
             [self setValue:newArray forKey:aspectArrayName];
+            return YES;
+        }
+    }
+    return NO;
+}
+
+- (BOOL)containIdentifierWithSelector:(SEL)selector {
+    for (AspectIdentifier *identifier in self.beforeAspects) {
+        if (identifier.selector == selector) {
+            return YES;
+        }
+    }
+    for (AspectIdentifier *identifier in self.afterAspects) {
+        if (identifier.selector == selector) {
+            return YES;
+        }
+    }
+    for (AspectIdentifier *identifier in self.insteadAspects) {
+        if (identifier.selector == selector) {
             return YES;
         }
     }

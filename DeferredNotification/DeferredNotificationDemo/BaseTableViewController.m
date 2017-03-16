@@ -7,6 +7,7 @@
 
 #import "BaseTableViewController.h"
 #import "AViewController.h"
+#import "BViewController.h"
 #import "YHDeferredNotification.h"
 @interface BaseTableViewController ()
 
@@ -19,6 +20,7 @@
 
 - (void)dealloc{
     [self unsubscribeAll];
+    NSLog(@"%s",__func__);
 }
 
 - (void)viewDidLoad {
@@ -33,7 +35,7 @@
                             },
                         @{
                             @"title": @"一次性订阅",
-                            @"instanceClass": [AViewController class]
+                            @"instanceClass": [BViewController class]
                             }
                         ];
     
@@ -43,7 +45,6 @@
 #pragma mark - event -
 
 - (void)startRefresh:(id)sender{
-    NSLog(@"start refresh");
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.refreshControl endRefreshing];
     });
@@ -53,9 +54,20 @@
 - (void)subscribe{
     __weak __typeof__(self) weakSelf = self;
     
-    [self subscribe:@"NotificationA" onSelector:@selector(viewWillAppear:) withOptions:YHDeferredOptionsAfter|YHDeferredOptionsOnece handler:^(id data){
+    [self subscribe:@"NotificationA" onSelector:@selector(viewWillAppear:) withOptions:YHDeferredOptionsAfter handler:^(id data){
         __strong __typeof__(weakSelf) strongSelf = weakSelf;
-        NSLog(@"receive NotificationA!");
+        NSLog(@"viewWillAppear:receive NotificationA!");
+        if (data) {
+            NSLog(@"data:%@",data);
+        }
+        [strongSelf.refreshControl beginRefreshing];
+        [strongSelf.tableView setContentOffset:CGPointMake(0, strongSelf.tableView.contentOffset.y-strongSelf.refreshControl.frame.size.height) animated:YES];
+        [strongSelf.refreshControl sendActionsForControlEvents:UIControlEventValueChanged];
+    }];
+    
+    [self subscribe:@"NotificationB" onSelector:@selector(viewWillAppear:) withOptions:YHDeferredOptionsAfter|YHDeferredOptionsOnece handler:^(id data){
+        __strong __typeof__(weakSelf) strongSelf = weakSelf;
+        NSLog(@"viewWillAppear:receive NotificationB!");
         if (data) {
             NSLog(@"data:%@",data);
         }
