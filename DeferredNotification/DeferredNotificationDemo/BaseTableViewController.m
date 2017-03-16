@@ -60,9 +60,7 @@
         if (data) {
             NSLog(@"data:%@",data);
         }
-        [strongSelf.refreshControl beginRefreshing];
-        [strongSelf.tableView setContentOffset:CGPointMake(0, strongSelf.tableView.contentOffset.y-strongSelf.refreshControl.frame.size.height) animated:YES];
-        [strongSelf.refreshControl sendActionsForControlEvents:UIControlEventValueChanged];
+        [strongSelf beginRefreshing];
     }];
     
     [self subscribe:@"NotificationB" onSelector:@selector(viewWillAppear:) withOptions:YHDeferredOptionsAfter|YHDeferredOptionsOnece handler:^(id data){
@@ -71,10 +69,14 @@
         if (data) {
             NSLog(@"data:%@",data);
         }
-        [strongSelf.refreshControl beginRefreshing];
-        [strongSelf.tableView setContentOffset:CGPointMake(0, strongSelf.tableView.contentOffset.y-strongSelf.refreshControl.frame.size.height) animated:YES];
-        [strongSelf.refreshControl sendActionsForControlEvents:UIControlEventValueChanged];
+        [strongSelf beginRefreshing];
     }];
+}
+
+- (void)beginRefreshing{
+    [self.refreshControl beginRefreshing];
+    [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentOffset.y-self.refreshControl.frame.size.height) animated:YES];
+    [self.refreshControl sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
 #pragma mark - tableView delegate -

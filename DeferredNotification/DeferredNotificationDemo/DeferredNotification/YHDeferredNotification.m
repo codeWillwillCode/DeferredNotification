@@ -39,14 +39,15 @@
 static NSString *const kYHDeferredNotificationKey = @"kYHDeferredNotificationKey";
 
 static NSMutableArray *arrayForObservers(YHDeferredManager *self, NSString *key) {
-    __block NSMutableArray *ret = nil;
+    NSMutableArray *ret = nil;
     ret = [self.observers objectForKey:key];
     if (ret) {
         return ret;
     }
     ret = [NSMutableArray new];
+    NSMutableDictionary *observers = self.observers;
     dispatch_barrier_async(self.deferredQueue, ^{
-        [self.observers setObject:ret forKey:key];
+        [observers setObject:ret forKey:key];
     });
     return ret;
 }
@@ -76,8 +77,8 @@ static NSMutableArray *arrayForObservers(YHDeferredManager *self, NSString *key)
                               usingBlock:^(id<AspectInfo>aspectInfo){
                                   if (!aspectInfo.instance) return;
                                   YHDeferredManager *manager = [YHDeferredManager sharedManager];
-                                  NSMutableArray *infosArray = arrayForObservers(manager, name);
-                                  [infosArray enumerateObjectsUsingBlock:^(YHDeferredObserver *ob, NSUInteger idx, BOOL * _Nonnull stop) {
+                                  NSArray *observersArr = arrayForObservers(manager,name);
+                                  [observersArr enumerateObjectsUsingBlock:^(YHDeferredObserver *ob, NSUInteger idx, BOOL * _Nonnull stop) {
                                       if (!ob.valid || ob.receiver != aspectInfo.instance) {
                                           return;
                                       }
@@ -103,7 +104,6 @@ static NSMutableArray *arrayForObservers(YHDeferredManager *self, NSString *key)
     [[NSNotificationCenter defaultCenter] addObserverForName:eventName object:self queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
         YHDeferredManager *manager = [YHDeferredManager sharedManager];
         NSArray *observersArr = arrayForObservers(manager, note.name);
-        
         for (YHDeferredObserver *ob in observersArr) {
             if (ob.selector != selector || ob.receiver != instance) {
                 continue;
@@ -122,8 +122,9 @@ static NSMutableArray *arrayForObservers(YHDeferredManager *self, NSString *key)
     ob.receiver = instance;
     ob.valid = NO;
     
+    NSMutableArray *obArray = arrayForObservers(self, eventName);
     dispatch_barrier_async(self.deferredQueue, ^{
-        [arrayForObservers(self, eventName) addObject:ob];
+        [obArray addObject:ob];
     });
 }
 
@@ -142,7 +143,7 @@ static NSMutableArray *arrayForObservers(YHDeferredManager *self, NSString *key)
     NSCParameterAssert(instance);
     NSCParameterAssert(name);
     
-    NSMutableArray *obArray = arrayForObservers(self, name);
+    NSMutableArray *obArray = arrayForObservers(self,name);
     if (!obArray) {
         return;
     }
@@ -173,6 +174,16 @@ static NSMutableArray *arrayForObservers(YHDeferredManager *self, NSString *key)
     for (NSString *curName in copiedAllKeys) {
         [self instance:instance unsubscribe:curName];
     }
+}
+
+#pragma mark - getter&&setter -
+
+- (NSMutableDictionary *)observers{
+    __block NSMutableDictionary *observers = nil;
+    dispatch_barrier_sync(self.deferredQueue, ^{
+        observers = _observers;
+    });
+    return observers;
 }
 
 @end

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		98C7758D1E778E2F004D6BE2 /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C7758C1E778E2F004D6BE2 /* Aspects.m */; };
 		98C775991E778F00004D6BE2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C775901E778F00004D6BE2 /* AppDelegate.m */; };
 		98C7759A1E778F00004D6BE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98C775911E778F00004D6BE2 /* Assets.xcassets */; };
 		98C7759B1E778F00004D6BE2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98C775921E778F00004D6BE2 /* LaunchScreen.storyboard */; };
@@ -18,12 +17,11 @@
 		98C775A41E77CA90004D6BE2 /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C775A31E77CA90004D6BE2 /* BaseTableViewController.m */; };
 		98C775A71E77CAA3004D6BE2 /* AViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C775A61E77CAA3004D6BE2 /* AViewController.m */; };
 		98C775AD1E7A636A004D6BE2 /* BViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C775AC1E7A636A004D6BE2 /* BViewController.m */; };
+		98C775B01E7A93EE004D6BE2 /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C775AF1E7A93EE004D6BE2 /* Aspects.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		98C775701E76EE7D004D6BE2 /* DeferredNotification.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeferredNotification.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		98C7758B1E778E2F004D6BE2 /* Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aspects.h; sourceTree = "<group>"; };
-		98C7758C1E778E2F004D6BE2 /* Aspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Aspects.m; sourceTree = "<group>"; };
 		98C7758F1E778F00004D6BE2 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		98C775901E778F00004D6BE2 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		98C775911E778F00004D6BE2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -40,6 +38,8 @@
 		98C775A61E77CAA3004D6BE2 /* AViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AViewController.m; sourceTree = "<group>"; };
 		98C775AB1E7A636A004D6BE2 /* BViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BViewController.h; sourceTree = "<group>"; };
 		98C775AC1E7A636A004D6BE2 /* BViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BViewController.m; sourceTree = "<group>"; };
+		98C775AE1E7A93EE004D6BE2 /* Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aspects.h; sourceTree = "<group>"; };
+		98C775AF1E7A93EE004D6BE2 /* Aspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Aspects.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,8 +73,8 @@
 		98C7758A1E778E2F004D6BE2 /* Aspects */ = {
 			isa = PBXGroup;
 			children = (
-				98C7758B1E778E2F004D6BE2 /* Aspects.h */,
-				98C7758C1E778E2F004D6BE2 /* Aspects.m */,
+				98C775AE1E7A93EE004D6BE2 /* Aspects.h */,
+				98C775AF1E7A93EE004D6BE2 /* Aspects.m */,
 			);
 			path = Aspects;
 			sourceTree = "<group>";
@@ -188,7 +188,7 @@
 				98C7759E1E778F00004D6BE2 /* ViewController.m in Sources */,
 				98C775AD1E7A636A004D6BE2 /* BViewController.m in Sources */,
 				98C775A41E77CA90004D6BE2 /* BaseTableViewController.m in Sources */,
-				98C7758D1E778E2F004D6BE2 /* Aspects.m in Sources */,
+				98C775B01E7A93EE004D6BE2 /* Aspects.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
