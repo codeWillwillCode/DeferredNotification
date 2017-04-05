@@ -31,7 +31,6 @@
     [buttonP sizeToFit];
     buttonP.frame = CGRectOffset(button.frame, 0, CGRectGetHeight(button.frame));
     [self.view addSubview:buttonP];
-    
 }
 
 - (void)refresh:(UIButton *)button{
